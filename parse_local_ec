@@ -1,0 +1,14 @@
+#! /usr/bin/env ruby
+require '/Users/mbs/src/ruby/kegg_requests/keggparser'
+require 'progressbar'
+dir = 'Fetched_EC_pages/'
+job_length = Dir.entries(dir).length-2
+progress = ProgressBar.new('Parsing HTML',job_length)
+Dir.foreach(dir) do |ec_page|
+	if ec_page.include? 'html'
+		text = File.open(dir+ec_page).read
+		KeggParser.parse_page(text)
+		progress.inc
+	end
+end
+progress.finish

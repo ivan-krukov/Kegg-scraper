@@ -1,0 +1,14 @@
+#! /usr/bin/env ruby
+require '/Users/mbs/src/ruby/kegg_requests/reactionparser'
+require 'progressbar'
+dir = 'c_elegans_reaction_pages/'
+job_length = Dir.entries(dir).length-2
+progress = ProgressBar.new('Parsing HTML',job_length)
+Dir.foreach(dir) do |reaction_page|
+	if reaction_page.include? 'html'
+		text = File.open(dir+reaction_page).read
+		ReactionParser.parse_page(text)
+		progress.inc
+	end
+end
+progress.finish

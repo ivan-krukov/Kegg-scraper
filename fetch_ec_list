@@ -1,0 +1,37 @@
+#!/usr/bin/env ruby
+
+require 'net/http/persistent'
+require 'trollop'
+
+require 'ruby-debug'
+require 'progressbar'
+module KeggFetcher
+	@@host = 'http://www.genome.jp/'
+	@@reaction = 'dbget-bin/www_bget?ec:'
+	@@output_directory = 'Fetched_EC_pages/'
+	@@output_file = @@output_directory + 'EC_entry'
+	
+	def KeggFetcher.fetch_ec_list(ec_numbers, save_fetched_pages = true)
+		progress = ProgressBar.new('Retrieving KEGG entries', ec_numbers.length)
+		http = Net::HTTP::Persistent.new
+		ec_numbers.each do |ec|
+			response = http.request URI @@host + @@reaction + ec
+			puts "Failed request for #{ec};" unless response.class == Net::HTTPOK
+			if save_fetched_pages
+				Dir.mkdir @@output_directory unless Dir.exists? @@output_directory
+				File.open(@@output_file + ec + '.html','w') {|output| output.puts response.body}
+			end
+			progress.inc
+		end 
+		http.shutdown
+		progress.finish
+	end
+end
+
+if __FILE__ == $0
+	args = Trollop::options {opt :file, 'Input EC number list', :type=>String, :required=>true} 
+	Trollop::die :file, "Provided EC file does not exist" unless File.exist?(args[:file]) if args[:file]
+	ec_numbers = File.open(args[:file]).read.split
+	KeggFetcher.fetch_ec_list(ec_numbers)
+end
+
