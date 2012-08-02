@@ -8,12 +8,7 @@ DB.create_table :enzymes do
 	String :comment
 end
 
-DB.create_table :substrates do
-	String :kegg_id, :primary_key => true
-	String :name
-end
-
-DB.create_table :products do
+DB.create_table :compounds do
 	String :kegg_id, :primary_key => true
 	String :name
 end
@@ -25,6 +20,16 @@ end
 
 DB.create_table :reactions do
 	String :kegg_id, :primary_key => true
+	String :name
+	String :definition
+	String :equation
+	String :comment
+end
+
+DB.create_table :rpairs do
+	String :kegg_id, :primary_key => true
+	String :pair
+	String :reaction_class
 end
 
 DB.create_table :pathways do
@@ -38,16 +43,11 @@ DB.create_table :orthologies do
 end
 
 #Association tables
-DB.create_table :enzymes_substrates do
-	key :enzyme_id
-	key :substrate_id
-	primary_key [:enzyme_id, :substrate_id]
-end
 
-DB.create_table :enzymes_products do
+DB.create_table :compounds_enzymes do
+	key :compound_id
 	key :enzyme_id
-	key :product_id
-	primary_key [:enzyme_id, :product_id]
+	primary_key [:compound_id, :enzyme_id]
 end
 
 DB.create_table :enzymes_genes do
@@ -74,3 +74,8 @@ DB.create_table :enzymes_orthologies do
 	primary_key [:enzyme_id, :orthology_id]
 end
 
+DB.create_table :reactions_rpairs do
+	key :reaction_id
+	key :rpair_id
+	primary_key [:reaction_id, :rpair_id]
+end

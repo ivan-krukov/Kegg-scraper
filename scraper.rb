@@ -10,6 +10,7 @@
 
 require 'trollop'
 require 'progressbar'
+require 'ruby-debug'
 require_relative 'keggfetcher'
 require_relative 'keggparser'
 
@@ -25,19 +26,19 @@ if __FILE__ == $0
 	unless args[:input_pages] and Dir.exists?(args[:input_pages])
 		pages_dir = 'Fetched_KEGG_data/'
 		enzymes = File.open(args[:file]).read.split
-		KeggFetcher.download_pages(enzymes,:ec_number,pages_dir)
+		KeggFetcher.download_pages(enzymes,'ec:',pages_dir)
 	else
 		pages_dir = args[:input_pages]
 	end
 	
 	#First, process the EC number entries
 	ec_entries = Dir.glob("#{pages_dir}ec:*.html")
-	progress = ProgressBar.new('Parsing EC data',ec_entries)
-	progress.format = "%-22s %3d%% %s %s"
+	progress = ProgressBar.new('Parsing ECs',ec_entries.length)
+	progress.format = "%-20s %3d%% %s %s"
 	
 	ec_entries.each do |page|
-		text = File.open(pages_dir+page).read
-		KeggParser.parse_ec_page(text)
+		text = File.open(page).read
+		KeggParser.parse_ec_page(text,'cel')
 		progress.inc
 	end
 	progress.finish
@@ -45,16 +46,16 @@ if __FILE__ == $0
 	#try to fetch the reaction data based on the enzyme entries
 	unless args[:input_pages] and Dir.exists?(args[:input_pages])
 		reactions = KeggParser.reaction_list
-		KeggFetcher.download_pages(reactions,:reactions,pages_dir)
+		KeggFetcher.download_pages(reactions,'rn:',pages_dir)
 	end
 
 	#Now parse the reaction data
 	reaction_entries = Dir.glob("#{pages_dir}rn:*.html")
-	progress = ProgressBar.new('Parsing reaction data',reaction_entries)
-	progress.format = "%-22s %3d%% %s %s"
+	progress = ProgressBar.new('Parsing reaction data',reaction_entries.length)
+	progress.format = "%-20s %3d%% %s %s"
 
 	reaction_entries.each do |page|
-		text = File.open(pages_dir+page).read
+		text = File.open(page).read
 		KeggParser.parse_reaction_page(text)
 		progress.inc
 	end

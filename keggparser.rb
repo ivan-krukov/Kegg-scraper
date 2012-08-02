@@ -7,13 +7,13 @@ require 'sequel'
 
 module KeggParser
 
-	@db_name = name	
+	$db_name = 'enzymes.sqlite'
 
-	File.delete @db_name if File.exists? @db_name
+	File.delete $db_name if File.exists? $db_name
 
 	require_relative 'create_schema'
 
-	def parse_ec_page(content,organism)
+	def KeggParser.parse_ec_page(content,organism)
 		organism.upcase!
 		tree = Nokogiri::HTML(content)
 		tables = tree.xpath('//td[@class="fr2"]/table[normalize-space()]')
@@ -48,14 +48,14 @@ module KeggParser
 							end
 							compound_name = entry.slice(/[-+,'()\w\d\s]+/).strip
 							if compound_id
-								begin
+								#begin
 									compound = Compound.find_or_create(:kegg_id => compound_id)
 									compound.name = compound_name
 									compound.save
 									enzyme.add_compound(compound)
-								rescue Sequel::DatabaseError
-									puts "It appears that enzyme #{enzyme.ec_number} is associated with multiple compounds that have the same KEGG IDs. Only one compound will be added"
-								end
+								#rescue Sequel::DatabaseError
+								#	puts "It appears that enzyme #{enzyme.ec_number} is associated with multiple compounds that have the same KEGG IDs. Only one compound will be added"
+								#end
 							end
 						end
 					when 'Comment'
@@ -90,7 +90,7 @@ module KeggParser
 		end
 	end
 
-	def parse_reaction_page(content)
+	def KeggParser.parse_reaction_page(content)
 		tree = Nokogiri::HTML(content)
 		table = tree.xpath('//td[@class="fr2"]/table[normalize-space()]').first
 		reaction = Reaction.new
@@ -124,9 +124,12 @@ module KeggParser
 			reaction.save
 		end
 	end
-
-	def reaction_list
-		return Reaction.kegg_id.all	
+	
+	def say_hello()
+		puts "hi"
+	end
+	def KeggParser.reaction_list()
+		return Reaction.all.map{|r| r.kegg_id}
 	end
 
 end

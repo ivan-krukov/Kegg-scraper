@@ -1,0 +1,166 @@
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html><head>
+<title>KEGG ENZYME: 1.1.1.99</title>
+<link type="text/css" rel="stylesheet" href="/css/gn2.css">
+<link rel="stylesheet" href="/css/bget.css" type="text/css">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<script type="text/javascript">
+<!--
+function btn(bobj,img) {
+    bobj.src = "/Fig/bget/button_" + img + ".gif";
+}
+function init(){
+}
+function Link_XtrctSeq2(form) {
+    var dna_from;
+    var dna_to;
+    var dna_len;
+    var plus_up   = Number(form.XtrctSeq_UP.value) ;
+    var plus_down = Number(form.XtrctSeq_DOWN.value);
+    var vector    = Number(form.VECTOR.value);
+    var org       = form.ORG.value;
+    var chr       = form.CHR.value;
+    var kid       = form.KEGGID.value;
+    var url;
+
+    if (plus_up == 0 && plus_down == 0) {
+	url = "/dbget-bin/www_bget?-f+-n+n+" + kid;
+    }
+    else {
+	if (vector == 1) {
+	    dna_from  = Number(form.FROM.value)  - plus_up;
+	    dna_to    = Number(form.TO.value) + plus_down;
+	} else {
+	    dna_from  = Number(form.FROM.value)  - plus_down;
+	    dna_to    = Number(form.TO.value) + plus_up;
+	}
+
+	url = "/dbget-bin/cut_sequence_genes.pl?FROM=" + dna_from + "&TO=" + dna_to +"&VECTOR=" + vector + "&ORG=" + org;
+	if (chr) url += "&CHR=" + chr;
+    }
+    //window.open( url, "_self" );
+    location.href = url;
+}
+function go_taxonomy(form){
+  form.submit();
+}
+//--->
+</script>
+
+</head>
+<body onload="window.focus();init();" bgcolor="#ffffff">
+<div>
+
+<table border=0 cellpadding=0 cellspacing=0><tr><td>
+<table border="0" cellspacing="0" cellpadding="0" width="690"><tr><td width="70"><a href="/kegg/kegg2.html"><img align="middle" border="0" src="/Fig/bget/kegg2.gif" alt="KEGG"></a></td><td>&nbsp;&nbsp;&nbsp;</td><td><a name="enzyme:1.1.1.99"></a><font class="title2">ENZYME: 1.1.1.99</font></td><td align="right" valign="bottom"><a href="javascript:void(window.open('/kegg/document/help_bget_enzyme.html','KEGG_Help','toolbar=no,location=no,directories=no,width=720,height=640,resizable=yes,scrollbars=yes'))"><img onmouseup="btn(this,'Hb')" align="middle" onmouseout="btn(this,'Hb')" onmousedown="btn(this,'Hbd')" onmouseover="btn(this,'Hbh')" alt="Help" name="help" border="0" src="/Fig/bget/button_Hb.gif"></a></td></tr></table>
+<table border=0 cellpadding=0 cellspacing=0><tr><td valign="top">
+<form method="post" action="/kegg-bin/search_htext" enctype="application/x-www-form-urlencoded" name="form1">
+<table border=0 cellpadding=1 cellspacing=0>
+<tr>
+<td class="fr2">
+<table border=0 cellpadding=2 cellspacing=0 style="border-bottom:#000 1px solid">
+
+<tr><th class="th20" align="left" valign="middle" style="border-color:#000; border-width: 1px 0px 0px 1px; border-style: solid"><nobr>Entry</nobr></th>
+<td class="td20" style="border-color:#000; border-width: 1px 1px 0px 1px; border-style: solid"><table width="555" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><code>EC&nbsp;1.1.1.99&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Enzyme&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+</code></td> <td align="right"><br></td></tr></table></td></tr>
+
+
+<tr><th class="th21" align="left" valign="top" style="border-color:#000; border-width: 1px 0px 0px 1px; border-style: solid"><nobr>Name</nobr></th>
+<td class="td21" style="border-color:#000; border-width: 1px 1px 0px 1px; border-style: solid"><div style="width:555px;overflow-x:auto;overflow-y:hidden">(S)-2-hydroxy-fatty-acid dehydrogenase;<br>
+dehydrogenase, L-2-hydroxy fatty acid;<br>
+L-2-hydroxy fatty acid dehydrogenase;<br>
+2-hydroxy fatty acid oxidase<br>
+</div></td></tr>
+
+
+<tr><th class="th20" align="left" valign="top" style="border-color:#000; border-width: 1px 0px 0px 1px; border-style: solid"><nobr>Class</nobr></th>
+<td class="td20" style="border-color:#000; border-width: 1px 1px 0px 1px; border-style: solid"><div style="width:555px;overflow-x:auto;overflow-y:hidden">Oxidoreductases;<br>
+Acting on the CH-OH group of donors;<br>
+With NAD+ or NADP+ as acceptor<br>
+<a href="/kegg-bin/search_brite?option=-a&amp;search_string=1.1.1.99"><img onmouseup="btn(this,'BHb')" align="middle" onmouseout="btn(this,'BHb')" onmousedown="btn(this,'BHbd')" onmouseover="btn(this,'BHbh')" alt="BRITE hierarchy" name="BRH" border="0" src="/Fig/bget/button_BHb.gif"></a></div></td></tr>
+
+
+<tr><th class="th21" align="left" valign="top" style="border-color:#000; border-width: 1px 0px 0px 1px; border-style: solid"><nobr>Sysname</nobr></th>
+<td class="td21" style="border-color:#000; border-width: 1px 1px 0px 1px; border-style: solid"><div style="width:555px;overflow-x:auto;overflow-y:hidden">(S)-2-hydroxystearate:NAD+ oxidoreductase<br>
+</div></td></tr>
+
+
+<tr><th class="th20" align="left" valign="top" style="border-color:#000; border-width: 1px 0px 0px 1px; border-style: solid"><nobr><nobr>Reaction(IUBMB)</nobr></nobr></th>
+<td class="td20" style="border-color:#000; border-width: 1px 1px 0px 1px; border-style: solid"><div style="width:555px;overflow-x:auto;overflow-y:hidden">(S)-2-hydroxystearate + NAD+ = 2-oxostearate + NADH + H+ [RN:<a href="/dbget-bin/www_bget?rn:R03022">R03022</a>]<br>
+</div></td></tr>
+
+
+<tr><th class="th21" align="left" valign="top" style="border-color:#000; border-width: 1px 0px 0px 1px; border-style: solid"><nobr>Reaction(KEGG)</nobr></th>
+<td class="td21" style="border-color:#000; border-width: 1px 1px 0px 1px; border-style: solid"><div style="width:555px;overflow-x:auto;overflow-y:hidden"><a href="/dbget-bin/www_bget?rn:R03022">R03022</a><br>
+<a href="/dbget-bin/www_bget?reaction+R03022"><img onmouseup="btn(this,'SAb')" align="middle" onmouseout="btn(this,'SAb')" onmousedown="btn(this,'SAbd')" onmouseover="btn(this,'SAbh')" alt="Show" name="show_all" border="0" src="/Fig/bget/button_SAb.gif"></a></div></td></tr>
+
+
+<tr><th class="th20" align="left" valign="top" style="border-color:#000; border-width: 1px 0px 0px 1px; border-style: solid"><nobr>Substrate</nobr></th>
+<td class="td20" style="border-color:#000; border-width: 1px 1px 0px 1px; border-style: solid"><div style="width:555px;overflow-x:auto;overflow-y:hidden">(S)-2-hydroxystearate [CPD:<a href="/dbget-bin/www_bget?cpd:C03045">C03045</a>];<br>
+NAD+ [CPD:<a href="/dbget-bin/www_bget?cpd:C00003">C00003</a>]<br>
+</div></td></tr>
+
+
+<tr><th class="th21" align="left" valign="top" style="border-color:#000; border-width: 1px 0px 0px 1px; border-style: solid"><nobr>Product</nobr></th>
+<td class="td21" style="border-color:#000; border-width: 1px 1px 0px 1px; border-style: solid"><div style="width:555px;overflow-x:auto;overflow-y:hidden">2-oxostearate [CPD:<a href="/dbget-bin/www_bget?cpd:C00869">C00869</a>];<br>
+NADH [CPD:<a href="/dbget-bin/www_bget?cpd:C00004">C00004</a>];<br>
+H+ [CPD:<a href="/dbget-bin/www_bget?cpd:C00080">C00080</a>]<br>
+</div></td></tr>
+
+
+<tr><th class="th20" align="left" valign="top" style="border-color:#000; border-width: 1px 0px 0px 1px; border-style: solid"><nobr>Reference</nobr></th>
+<td class="td20" style="border-color:#000; border-width: 1px 1px 0px 1px; border-style: solid"><div style="width:555px;overflow-x:auto;overflow-y:hidden">1&nbsp;&nbsp;[PMID:<a href="http://www.ncbi.nlm.nih.gov/pubmed/5443694">5443694</a>]</div></td></tr>
+
+
+<tr><th class="th21" align="left" valign="top" style="border-color:#000; border-width: 0px 0px 0px 1px; border-style: solid"><nobr>&nbsp;&nbsp;Authors</nobr></th>
+<td class="td21" style="border-color:#000; border-width: 0px 1px 0px 1px; border-style: solid"><div style="width:555px;overflow-x:auto;overflow-y:hidden">Levis GM.</div></td></tr>
+
+
+<tr><th class="th20" align="left" valign="top" style="border-color:#000; border-width: 0px 0px 0px 1px; border-style: solid"><nobr>&nbsp;&nbsp;Title</nobr></th>
+<td class="td20" style="border-color:#000; border-width: 0px 1px 0px 1px; border-style: solid"><div style="width:555px;overflow-x:auto;overflow-y:hidden">2-Hydroxy fatty acid oxidases of rat kidney.</div></td></tr>
+
+
+<tr><th class="th21" align="left" valign="top" style="border-color:#000; border-width: 0px 0px 0px 1px; border-style: solid"><nobr>&nbsp;&nbsp;Journal</nobr></th>
+<td class="td21" style="border-color:#000; border-width: 0px 1px 0px 1px; border-style: solid"><div style="width:555px;overflow-x:auto;overflow-y:hidden">Biochem. Biophys. Res. Commun. 38 (1970) 470-7.</div></td></tr>
+
+
+<tr><th class="th20" align="left" valign="top" style="border-color:#000; border-width: 1px 0px 0px 1px; border-style: solid"><nobr>Other DBs</nobr></th>
+<td class="td20" style="border-color:#000; border-width: 1px 1px 0px 1px; border-style: solid"><div style="width:555px;overflow-x:auto;overflow-y:hidden"><div style="float:left">ExplorEnz - The Enzyme Database:&nbsp;</div><div style="margin-left:17em"><a href="http://www.enzyme-database.org/query.php?ec=1.1.1.99">1.1.1.99</a></div><div style="float:left">IUBMB Enzyme Nomenclature:&nbsp;</div><div style="margin-left:14em"><a href="http://www.chem.qmw.ac.uk/iubmb/enzyme/EC1/1/1/99.html">1.1.1.99</a></div><div style="float:left">ExPASy - ENZYME nomenclature database:&nbsp;</div><div style="margin-left:20em"><a href="http://enzyme.expasy.org/EC/1.1.1.99">1.1.1.99</a></div><div style="float:left">BRENDA, the Enzyme Database:&nbsp;</div><div style="margin-left:15em"><a href="http://www.brenda-enzymes.info/php/result_flat.php4?ecno=1.1.1.99">1.1.1.99</a></div><div style="float:left">CAS:&nbsp;</div><div style="margin-left:3em">37250-33-2</div></div></td></tr>
+
+</table></td></tr></table>
+<br></form></td><td valign="top"><div style="margin-top:0px;margin-left:1em;border:#ddd 1px solid"><div class="th20" style="font-weight:bold;line-height:1.5em">&nbsp;&nbsp;All links&nbsp;&nbsp;</div>
+<pre style="margin-left:1em">
+<span style="color:#006"><a href="/dbget-bin/get_linkdb?-t+5+ec:1.1.1.99">Chemical substance (5)</a></span>   
+   <a href="/dbget-bin/get_linkdb?-t+compound+ec:1.1.1.99">KEGG COMPOUND (5)</a>   
+<span style="color:#006"><a href="/dbget-bin/get_linkdb?-t+6+ec:1.1.1.99">Chemical reaction (4)</a></span>   
+   <a href="/dbget-bin/get_linkdb?-t+reaction+ec:1.1.1.99">KEGG REACTION (1)</a>   
+   <a href="/dbget-bin/get_linkdb?-t+rpair+ec:1.1.1.99">KEGG RPAIR (2)</a>   
+   <a href="/dbget-bin/get_linkdb?-t+rclass+ec:1.1.1.99">KEGG RCLASS (1)</a>   
+<span style="color:#006"><a href="/dbget-bin/get_linkdb?-t+9+ec:1.1.1.99">Protein sequence (2)</a></span>   
+   <a href="/dbget-bin/get_linkdb?-t+prf+ec:1.1.1.99">PRF (1)</a>   
+   <a href="/dbget-bin/get_linkdb?-t+pmd+ec:1.1.1.99">PMD (1)</a>   
+<span style="color:#006"><a href="/dbget-bin/get_linkdb?-t+10+ec:1.1.1.99">DNA sequence (2)</a></span>   
+   <a href="/dbget-bin/get_linkdb?-t+genbank+ec:1.1.1.99">GenBank (1)</a>   
+   <a href="/dbget-bin/get_linkdb?-t+embl+ec:1.1.1.99">EMBL (1)</a>   
+<span style="color:#006"><a href="/dbget-bin/get_linkdb?-t+15+ec:1.1.1.99">Literature (1)</a></span>   
+   <a href="/dbget-bin/get_linkdb?-t+pubmed+ec:1.1.1.99">PubMed (1)</a>   
+<span style="color:#006"><a href="/dbget-bin/get_linkdb?-t+17+ec:1.1.1.99">Enzyme (4)</a></span>   
+   <a href="/dbget-bin/get_linkdb?-t+brenda+ec:1.1.1.99">BRENDA (1)</a>   
+   <a href="/dbget-bin/get_linkdb?-t+expasy-enzyme+ec:1.1.1.99">EXPASY-ENZYME (1)</a>   
+   <a href="/dbget-bin/get_linkdb?-t+explorenz+ec:1.1.1.99">EXPLORENZ (1)</a>   
+   <a href="/dbget-bin/get_linkdb?-t+iubmb+ec:1.1.1.99">IUBMB (1)</a>   
+<a href="/dbget-bin/get_linkdb?-t+alldb+ec:1.1.1.99">All databases (18)</a>   
+<br><a href="/dbget-bin/get_linkdb?-N+ec:1.1.1.99">Download RDF</a>   
+</pre>
+</div>
+</td></tr></table></td></tr></table>
+
+
+<a href="/dbget/">DBGET</a> integrated database retrieval system</div>
+
+</body>
+</html>

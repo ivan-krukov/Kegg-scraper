@@ -1,10 +1,13 @@
-DB = Sequel.sqlite(@db_name)
+require 'ruby-debug'
+
+DB = Sequel.sqlite($db_name)
+
 
 require_relative 'create_tables'
 
 class Enzyme < Sequel::Model
 	unrestrict_primary_key
-	many_to_many :compunds
+	many_to_many :compounds
 	many_to_many :genes
 	many_to_many :reactions
 	many_to_many :pathways
@@ -24,6 +27,12 @@ end
 class Reaction < Sequel::Model
 	unrestrict_primary_key
 	many_to_many :enzymes
+	many_to_many :rpairs
+end
+
+class Rpair < Sequel::Model
+	unrestrict_primary_key
+	many_to_many :reactions
 end
 
 class Pathway < Sequel::Model
